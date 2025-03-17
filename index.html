@@ -149,6 +149,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/17/CI-CD%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Aaron">
+      <meta itemprop="description" content="Record technical">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Aaron's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/03/17/CI-CD%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/" class="post-title-link" itemprop="url">CI/CD持续集成</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-03-17 21:17:55 / 修改时间：22:41:20" itemprop="dateCreated datePublished" datetime="2025-03-17T21:17:55+08:00">2025-03-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="CI-CD持续集成"><a href="#CI-CD持续集成" class="headerlink" title="CI&#x2F;CD持续集成"></a>CI&#x2F;CD持续集成</h1><h2 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a>Gitlab</h2><h2 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># GitLab 的安装搭建指南</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 环境准备</span></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**操作系统**</span>: CentOS 7</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**内存**</span>: 4G 及以上</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**磁盘**</span>: 20G 可用空间</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**安全配置**</span>: 关闭防火墙和 SELinux  </span><br><span class="line">  <span class="code">```bash</span></span><br><span class="line"><span class="code">  systemctl stop firewalld</span></span><br><span class="line"><span class="code">  systemctl disable firewalld</span></span><br><span class="line"><span class="code">  setenforce 0</span></span><br><span class="line"><span class="code">  sed -i &#x27;s/SELINUX=enforcing/SELINUX=disabled/g&#x27; /etc/selinux/config</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="1-安装环境依赖"><a href="#1-安装环境依赖" class="headerlink" title="1. 安装环境依赖"></a>1. 安装环境依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y curl policycoreutils-python openssh-server postfix wget</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-获取-GitLab-安装包"><a href="#2-获取-GitLab-安装包" class="headerlink" title="2. 获取 GitLab 安装包"></a>2. 获取 GitLab 安装包</h3><p>建议从官方仓库安装最新版本（推荐）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sS https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | <span class="built_in">sudo</span> bash</span><br></pre></td></tr></table></figure>
+
+<p>若需手动下载旧版本（如 <code>10.2.2</code>，注意版本已过时），需修正文件名中的 <code>e17</code> 为 <code>el7</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://packages.gitlab.com/gitlab/gitlab-ce/packages/el/7/gitlab-ce-10.2.2-ce.0.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-安装-GitLab"><a href="#3-安装-GitLab" class="headerlink" title="3. 安装 GitLab"></a>3. 安装 GitLab</h3><ul>
+<li><p><strong>通过官方仓库安装最新版</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EXTERNAL_URL=<span class="string">&quot;http://your-server-ip&quot;</span> yum install -y gitlab-ce</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>手动安装旧版本 RPM 包</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum localinstall -y gitlab-ce-10.2.2-ce.0.el7.x86_64.rpm</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-配置-GitLab"><a href="#4-配置-GitLab" class="headerlink" title="4. 配置 GitLab"></a>4. 配置 GitLab</h3><ol>
+<li><p><strong>修改配置文件</strong>：<br>编辑 <code>/etc/gitlab/gitlab.rb</code>，设置访问地址：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">external_url <span class="string">&#x27;http://your-server-ip&#x27;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### Email Settings</span></span><br><span class="line">gitlab_rails[<span class="string">&#x27;gitlab_email_enabled&#x27;</span>] = <span class="literal">true</span></span><br><span class="line">gitlab_rails[<span class="string">&#x27;gitlab_email_from&#x27;</span>] = <span class="string">&#x27;example@example.com&#x27;</span></span><br><span class="line">gitlab_rails[<span class="string">&#x27;gitlab_email_display_name&#x27;</span>] = <span class="string">&#x27;Example&#x27;</span> </span><br><span class="line"><span class="comment">##gitlab_rails[&#x27;gitlab_email_reply_to&#x27;] = &#x27;noreply@example.com&#x27; </span></span><br><span class="line"><span class="comment">##gitlab_rails[&#x27;gitlab_email_subject_suffix&#x27;] = &#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### GitLab email server settings###！</span></span><br><span class="line"><span class="comment">###！Docs: https://docs.gitlab.com/omnibus/settings/smtp.html </span></span><br><span class="line"><span class="comment">###！**Use smtp instead of sendmail/postfix**</span></span><br><span class="line">gitlab_rails[<span class="string">&#x27;smtp_enable&#x27;</span>] = <span class="literal">true</span> </span><br><span class="line">gitlab_rails[<span class="string">&#x27;smtp_address&#x27;</span>] = <span class="string">&quot;smtp.server&quot;</span> </span><br><span class="line">gitlab_rails[<span class="string">&#x27;smtp_port&#x27;</span>] = 465 </span><br><span class="line">gitlab_rails[<span class="string">&#x27;smtp_user_name&#x27;</span>] = <span class="string">&quot;smtp user&quot;</span> </span><br><span class="line">gitlab_rails[<span class="string">&#x27;smtp_password&#x27;</span>] = <span class="string">&quot;smtp password&quot;</span> </span><br><span class="line">gitlab_rails[<span class="string">&#x27;smtp_domain&#x27;</span>] = <span class="string">&quot;example.com&quot;</span> </span><br><span class="line">gitlab_rails[<span class="string">&#x27;smtp_authentication&#x27;</span>] = <span class="string">&quot;login&quot;</span> </span><br><span class="line">gitlab_rails[<span class="string">&#x27;smtp_enable_starttls_auto&#x27;</span>] = <span class="literal">true</span> </span><br><span class="line">gitlab_rails[<span class="string">&#x27;smtp_tls&#x27;</span>] = <span class="literal">false</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>应用配置并启动服务</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl reconfigure   <span class="comment"># 初始化配置（需等待完成）</span></span><br><span class="line">gitlab-rails console     <span class="comment"># 进入 Rails 控制台</span></span><br><span class="line">gitlab-ctl restart       <span class="comment"># 重启服务</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>发送邮箱</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Notify.test_email(<span class="string">&#x27;**@qq.com&#x27;</span>,<span class="string">&#x27;hello&#x27;</span>,<span class="string">&#x27;hello aaron&#x27;</span>).deliver_now</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>访问结束gitlab</strong><br> 访问命令<br> gitlab-ctl start<br> gitlab-ctl stop<br> gitlab-ctl stop postgresql<br> gitlab-ctl restart<br> gitlab-ctl status<br> gitlab-ctl reconfigure<br> gitlab-ctl tail<br> gitlab-ctl tail redis</p>
+<p> &#x2F;var&#x2F;opt&#x2F;gitlab&#x2F;git-data&#x2F;repositories&#x2F;：库默认存储目录<br> &#x2F;opt&#x2F;gitlab：应用代码和相应的依赖程序<br> &#x2F;var&#x2F;opt&#x2F;gitlab&#x2F;: gitlab-ctl reconfigure生成的数据和配置<br> &#x2F;etc&#x2F;gitlab:配置文件目录<br> &#x2F;var&#x2F;log&#x2F;gitlab：此目录下存放了gitlab各个组件产生的日志<br> &#x2F;var&#x2F;opt&#x2F;gitlab&#x2F;backups：备份文件生成的目录</p>
+</li>
+</ol>
+<h3 id="5-访问-GitLab"><a href="#5-访问-GitLab" class="headerlink" title="5. 访问 GitLab"></a>5. 访问 GitLab</h3><ul>
+<li>在浏览器中输入 <code>http://your-server-ip</code>。</li>
+<li>首次访问需设置 root 用户密码。</li>
+</ul>
+<h3 id="6-gitlba运行的组件如下"><a href="#6-gitlba运行的组件如下" class="headerlink" title="6. gitlba运行的组件如下"></a>6. gitlba运行的组件如下</h3><p>GitLab 由主要由以下服务构成，他们共同承担了 Gitlab 的运作需要<br>Nginx:静态 web 服务器。<br>gitlab-shell:用于处理 Git 命令和修改 authorized keys 列表。<br>gitlab-workhorse：轻量级的反向代理服务器。<br>logrotate：日志文件管理工具。<br>postgresql:数据库。<br>redis：缓存数据库。<br>sidekiq：用于在后台执行队列任务(异步执行)。<br>unicorn:An HTTP server for Rack applications, GitLab Rails 应用是托管在这个</p>
+<hr>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><strong>版本问题</strong>: GitLab 10.2.2 发布于 2017 年，已停止支持。建议安装最新版本以获得安全更新和功能支持。</li>
+<li><strong>防火墙配置</strong>: 若需启用防火墙，放行 HTTP&#x2F;HTTPS 端口：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --add-service=http</span><br><span class="line">firewall-cmd --permanent --add-service=https</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure></li>
+<li><strong>数据备份</strong>: 定期备份 GitLab 数据：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-rake gitlab:backup:create</span><br></pre></td></tr></table></figure></li>
+</ol>
+<pre><code>
+---
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/15/Unit-test-by-Google-Test/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -412,7 +515,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -421,7 +524,7 @@
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
