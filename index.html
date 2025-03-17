@@ -174,7 +174,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-03-17 21:17:55 / 修改时间：22:41:20" itemprop="dateCreated datePublished" datetime="2025-03-17T21:17:55+08:00">2025-03-17</time>
+              <time title="创建时间：2025-03-17 21:17:55 / 修改时间：22:50:55" itemprop="dateCreated datePublished" datetime="2025-03-17T21:17:55+08:00">2025-03-17</time>
             </span>
 
           
@@ -188,7 +188,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="CI-CD持续集成"><a href="#CI-CD持续集成" class="headerlink" title="CI&#x2F;CD持续集成"></a>CI&#x2F;CD持续集成</h1><h2 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a>Gitlab</h2><h2 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># GitLab 的安装搭建指南</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 环境准备</span></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**操作系统**</span>: CentOS 7</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**内存**</span>: 4G 及以上</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**磁盘**</span>: 20G 可用空间</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**安全配置**</span>: 关闭防火墙和 SELinux  </span><br><span class="line">  <span class="code">```bash</span></span><br><span class="line"><span class="code">  systemctl stop firewalld</span></span><br><span class="line"><span class="code">  systemctl disable firewalld</span></span><br><span class="line"><span class="code">  setenforce 0</span></span><br><span class="line"><span class="code">  sed -i &#x27;s/SELINUX=enforcing/SELINUX=disabled/g&#x27; /etc/selinux/config</span></span><br></pre></td></tr></table></figure>
+          <h1 id="CI-CD持续集成"><a href="#CI-CD持续集成" class="headerlink" title="CI&#x2F;CD持续集成"></a>CI&#x2F;CD持续集成</h1><h1 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a>Gitlab</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># GitLab 的安装搭建指南</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 环境准备</span></span><br><span class="line"><span class="bullet">-</span> <span class="strong">**操作系统**</span>: CentOS 7</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**内存**</span>: 4G 及以上</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**磁盘**</span>: 20G 可用空间</span><br><span class="line"><span class="bullet">-</span> <span class="strong">**安全配置**</span>: 关闭防火墙和 SELinux  </span><br><span class="line">  <span class="code">```bash</span></span><br><span class="line"><span class="code">  systemctl stop firewalld</span></span><br><span class="line"><span class="code">  systemctl disable firewalld</span></span><br><span class="line"><span class="code">  setenforce 0</span></span><br><span class="line"><span class="code">  sed -i &#x27;s/SELINUX=enforcing/SELINUX=disabled/g&#x27; /etc/selinux/config</span></span><br></pre></td></tr></table></figure>
 
 <hr>
 <h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="1-安装环境依赖"><a href="#1-安装环境依赖" class="headerlink" title="1. 安装环境依赖"></a>1. 安装环境依赖</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y curl policycoreutils-python openssh-server postfix wget</span><br></pre></td></tr></table></figure>
@@ -232,6 +232,8 @@
 </ol>
 <pre><code>
 ---
+
+#Jenkins
 </code></pre>
 
       
